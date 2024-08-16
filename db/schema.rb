@@ -16,10 +16,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_16_143901) do
 
   create_table "games", force: :cascade do |t|
     t.integer "gametype", null: false
-    t.integer "fraglimit", null: false
+    t.integer "fraglimit", null: false # in seconds
     t.integer "timelimit", null: false
     t.integer "capturelimit"
-    t.integer "duration", null: false
+    t.integer "duration", null: false # in seconds
   end
 
   create_table "kills", force: :cascade do |t|
