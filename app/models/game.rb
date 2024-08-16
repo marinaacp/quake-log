@@ -10,6 +10,8 @@ class Game < ApplicationRecord
     gt_ctf: 4,
     gt_1fctf: 5,
     gt_obelisk: 6,
-    gt_harvester: 7     
+    gt_harvester: 7
   }
+
+  validates :gametype, :fraglimit, :timelimit, :duration, presence: true
 end

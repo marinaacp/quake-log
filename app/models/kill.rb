@@ -28,4 +28,6 @@ class Kill < ApplicationRecord
     mod_trigger_hurt: 22,
     mod_grapple: 23
   } # This enum does not include MISSIONPACK games
+
+  validates :victim_id, :type_death, presence: true
 end
