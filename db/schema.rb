@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_16_143901) do
   end
 
   create_table "kills", force: :cascade do |t|
-    t.bigint "killer_id", null: false
+    t.bigint "killer_id"
     t.bigint "victim_id", null: false
     t.integer "type_death", null: false
     t.boolean "is_world_death", default: false, null: false
