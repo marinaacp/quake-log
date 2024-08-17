@@ -1,0 +1,7 @@
+game_one:
+  id: 1
+  gametype: 3
+  fraglimit: 20
+  timelimit: 900
+  capturelimit: 1
+  duration: 740

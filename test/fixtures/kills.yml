@@ -1,0 +1,27 @@
+kill_one:
+  id: 1
+  killer_id: 1
+  victim_id: 2
+  type_death: 1
+  is_world_death: false
+
+kill_two:
+  id: 2
+  killer_id: 1
+  victim_id: 2
+  type_death: 3
+  is_world_death: false
+
+kill_three:
+  id: 3
+  killer_id: null
+  victim_id: 1
+  type_death: 22
+  is_world_death: true
+
+kill_four:
+  id: 4
+  killer_id: 2
+  victim_id: 1
+  type_death: 10
+  is_world_death: false
