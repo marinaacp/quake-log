@@ -1,0 +1,17 @@
+player_one:
+  id: 1
+  game_id: 1
+  name: "Marina Costa"
+  model: "uriel"
+  submodel: "zael"
+  id_in_log: 1
+  score: 10
+
+player_two:
+  id: 2
+  game_id: 1
+  name: "Jim"
+  model: "sarge"
+  submodel: null
+  id_in_log: 2
+  score: 5

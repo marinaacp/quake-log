@@ -1,6 +1,11 @@
 class Game < ApplicationRecord
   has_many :players, dependent: :destroy
-  has_many :kills, through: :players
+
+  # This association receives all kills from a game that did not happen through "world"
+  has_many :player_kills, through: :players, source: :kills_as_killer
+
+  # This association receives all kills from a game. All kills have a victim_id"
+  has_many :kills, through: :players, source: :kills_as_victim
 
   enum gametype: {
     gt_ffa: 0,
@@ -13,5 +18,5 @@ class Game < ApplicationRecord
     gt_harvester: 7
   }
 
-  validates :gametype, :fraglimit, :timelimit, :duration, presence: true
+  validates :gametype, :fraglimit, :timelimit, presence: true
 end
