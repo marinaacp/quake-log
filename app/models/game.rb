@@ -13,5 +13,5 @@ class Game < ApplicationRecord
     gt_harvester: 7
   }
 
-  validates :gametype, :fraglimit, :timelimit, :duration, presence: true
+  validates :gametype, :fraglimit, :timelimit, presence: true
 end
