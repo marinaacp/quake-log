@@ -3,7 +3,7 @@ require 'test_helper'
 class LogParserTest < ActiveSupport::TestCase
   def setup
     @file = file_fixture('qgames_test.log')
-    @parser = LogParser.new(@file)
+    @parser = LogParserService.new(@file)
   end
 
   test 'should parse log and create games' do
@@ -20,16 +20,14 @@ class LogParserTest < ActiveSupport::TestCase
     expected_first_game = Game.new(
       gametype: 0,
       fraglimit: 20,
-      timelimit: 900,
-      capturelimit: 8,
-      duration: 1237
+      timelimit: 15,
+      capturelimit: 8
     )
     expected_second_game = Game.new(
       gametype: 0,
       fraglimit: 20,
-      timelimit: 900,
-      capturelimit: 8,
-      duration: 332
+      timelimit: 15,
+      capturelimit: 8
     )
 
     assert_equal expected_first_game.attributes, first_game.attributes
@@ -105,7 +103,7 @@ class LogParserTest < ActiveSupport::TestCase
 
   test 'should not create any game if there is no client connection' do
     file = file_fixture('qgames_empty_test.log')
-    parser = LogParser.new(file)
+    parser = LogParserService.new(file)
 
     assert_difference('Game.count', 0) do
       parser.parse
@@ -114,7 +112,7 @@ class LogParserTest < ActiveSupport::TestCase
 
   test 'should not create any records if the log file is empty' do
     empty_log_file = StringIO.new('')
-    parser = LogParser.new(empty_log_file)
+    parser = LogParserService.new(empty_log_file)
 
     assert_no_difference('Game.count') do
       assert_no_difference('Player.count') do

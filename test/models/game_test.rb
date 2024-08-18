@@ -21,10 +21,6 @@ class GameTest < ActiveSupport::TestCase
     @game.timelimit = nil
     assert_not @game.valid?
     assert_includes @game.errors[:timelimit], "can't be blank"
-
-    @game.duration = nil
-    assert_not @game.valid?
-    assert_includes @game.errors[:duration], "can't be blank"
   end
 
   test "should have many players" do
