@@ -4,7 +4,7 @@ module Api
     def index
       players = Player.all
 
-      render json: players.as_json(methods: [:kills_data])
+      render json: players.as_json(methods: [:kills_data]) and return
     rescue Exception => e
       Rails.logger.error(YAML::dump(e))
       render json: e.message, status: :unprocessable_content and return
@@ -13,7 +13,7 @@ module Api
     def show
       player = Player.find(params[:id])
 
-      render json: player.as_json(methods: [:kills_data])
+      render json: player.as_json(methods: [:kills_data]) and return
     rescue Exception => e
       Rails.logger.error(YAML::dump(e))
       render json: e.message, status: :unprocessable_content and return

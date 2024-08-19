@@ -16,9 +16,9 @@ module Api
         # Call the LogParserService
         LogParserService.new(file_path).parse
 
-        render json: { message: 'File uploaded successfully' }, status: :ok
+        render json: { message: 'File uploaded successfully' }, status: :ok and return
       else
-        render json: { error: 'Invalid file format' }, status: :unprocessable_entity
+        render json: { error: 'Invalid file format' }, status: :unprocessable_entity and return
       end
 
       # Clean up the temporary file
@@ -32,7 +32,7 @@ module Api
     def index
       games = Game.includes(:players, :kills).all
 
-      render json: games.as_json(methods: [:game_data])
+      render json: games.as_json(methods: [:game_data]) and return
     rescue Exception => e
       Rails.logger.error(YAML::dump(e))
       render json: e.message, status: :unprocessable_content and return
@@ -41,7 +41,7 @@ module Api
     def show
       game = Game.includes(:players, :kills).find(params[:id])
 
-      render json: game.as_json(methods: [:game_data])
+      render json: game.as_json(methods: [:game_data]) and return
     rescue Exception => e
       Rails.logger.error(YAML::dump(e))
       render json: e.message, status: :unprocessable_content and return
@@ -57,7 +57,7 @@ module Api
         }
       end
 
-      render json: json
+      render json: json and return
     rescue => e
       Rails.logger.error(YAML.dump(e))
       render json: e.message, status: :unprocessable_content and return
