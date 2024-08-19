@@ -23,7 +23,7 @@ module Api
 
     rescue Exception => e
       Rails.logger.error(YAML::dump(e))
-      render json: e.message, status: :unprocessable_entity and return
+      render json: e.message, status: :unprocessable_content and return
     end
 
     def index
