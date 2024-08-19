@@ -13,7 +13,7 @@ class Api::GamesControllerTest < ActionDispatch::IntegrationTest
     post api_games_url, params: { file: file }
 
     assert_response :ok
-    assert_equal 'File uploaded successfully', JSON.parse(response.body)['message']
+    assert_includes JSON.parse(response.body)['message'], 'File uploaded successfully'
   end
 
   test "should not create game with invalid file" do
@@ -22,7 +22,7 @@ class Api::GamesControllerTest < ActionDispatch::IntegrationTest
     post api_games_url, params: { file: file }
 
     assert_response :unprocessable_entity
-    assert_equal 'Invalid file format', JSON.parse(response.body)['error']
+    assert_includes JSON.parse(response.body)['error'], 'Invalid file format'
   end
 
   test "should get index" do

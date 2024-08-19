@@ -1,7 +1,7 @@
 module Api
   class GamesController < ApplicationController
     # Disable CSRF protection for stateless API requests
-    protect_from_forgery with: :null_session
+    protect_from_forgery with: :null_session, only: [:create]
 
     def create
       file = params[:file]
@@ -13,20 +13,17 @@ module Api
           f.write(file.read)
         end
 
-        # Call the LogParserService
-        LogParserService.new(file_path).parse
+        # Call a job for processing the file
+        ParseLogFileJob.perform_later(file_path.to_s)
 
-        render json: { message: 'File uploaded successfully' }, status: :ok and return
+        render json: { message: 'File uploaded successfully. Processing in background.' }, status: :ok
       else
-        render json: { error: 'Invalid file format' }, status: :unprocessable_entity and return
+        render json: { error: 'Invalid file format' }, status: :unprocessable_entity
       end
-
-      # Clean up the temporary file
-      File.delete(file_path) if File.exist?(file_path)
 
     rescue Exception => e
       Rails.logger.error(YAML::dump(e))
-      render json: e.message, status: :unprocessable_content and return
+      render json: e.message, status: :unprocessable_entity
     end
 
     def index
