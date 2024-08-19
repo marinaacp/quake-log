@@ -19,4 +19,25 @@ class Game < ApplicationRecord
   }
 
   validates :gametype, :fraglimit, :timelimit, :capturelimit, presence: true
+
+
+  def game_data
+    # Fetch all players in the game
+    player_ids = self.players.pluck(:id)
+    player_names = self.players.pluck(:id, :name).to_h
+
+    # Calculate total kills and kills by each player
+    total_kills = self.kills.count
+    kills_summary = player_ids.each_with_object({}) do |player_id, hash|
+      hash[player_names[player_id]] = player_kills.where(killer: player_id).count
+    end
+
+    return {
+      total_kills: total_kills,
+      players: player_names.values,
+      kills: kills_summary
+    }
+  end
+  
+
 end
