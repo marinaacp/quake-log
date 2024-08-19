@@ -16,14 +16,14 @@ module Api
         # Call a job for processing the file
         ParseLogFileJob.perform_later(file_path.to_s)
 
-        render json: { message: 'File uploaded successfully. Processing in background.' }, status: :ok
+        render json: { message: 'File uploaded successfully. Processing in background.' }, status: :ok and return
       else
-        render json: { error: 'Invalid file format' }, status: :unprocessable_entity
+        render json: { error: 'Invalid file format' }, status: :unprocessable_entity and return
       end
 
     rescue Exception => e
       Rails.logger.error(YAML::dump(e))
-      render json: e.message, status: :unprocessable_entity
+      render json: e.message, status: :unprocessable_entity and return
     end
 
     def index
