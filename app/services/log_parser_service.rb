@@ -152,7 +152,7 @@ class LogParserService
 
   def find_value_score(line)
     # Match the log structure using a regular expression
-    match_data = line.match(/score:\s(\d+).*client:\s(\d+)/)
+    match_data = line.match(/score:\s(-?\d+).*client:\s(\d+)/)
 
     # Extract the values for score and client
     hash = {

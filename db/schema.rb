@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_18_004357) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_18_201549) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_18_004357) do
     t.integer "gametype", null: false
     t.integer "fraglimit", null: false
     t.integer "timelimit", null: false # in minutes
-    t.integer "capturelimit"
+    t.integer "capturelimit", null: false
   end
 
   create_table "kills", force: :cascade do |t|

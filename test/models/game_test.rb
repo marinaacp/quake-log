@@ -9,7 +9,7 @@ class GameTest < ActiveSupport::TestCase
     assert @game.valid?
   end
 
-  test "should require gametype, fraglimit, timelimit, and duration" do
+  test "should require gametype, fraglimit, timelimit, and capturelimit" do
     @game.gametype = nil
     assert_not @game.valid?
     assert_includes @game.errors[:gametype], "can't be blank"
@@ -21,6 +21,10 @@ class GameTest < ActiveSupport::TestCase
     @game.timelimit = nil
     assert_not @game.valid?
     assert_includes @game.errors[:timelimit], "can't be blank"
+
+    @game.capturelimit = nil
+    assert_not @game.valid?
+    assert_includes @game.errors[:capturelimit], "can't be blank"
   end
 
   test "should have many players" do
@@ -28,6 +32,12 @@ class GameTest < ActiveSupport::TestCase
   end
 
   test "should have many kills through players" do
-    assert_respond_to @game, :kills
+    assert @game.respond_to?(:kills)
+    assert @game.kills.first.is_a?(Kill)
+  end
+
+  test "should have many player_kills through players" do
+    assert @game.respond_to?(:player_kills)
+    assert @game.player_kills.first.is_a?(Kill)
   end
 end
