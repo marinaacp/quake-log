@@ -10,9 +10,6 @@ class Api::GamesControllerTest < ActionDispatch::IntegrationTest
   test "should create game with valid file" do
     file = fixture_file_upload('qgames_test.log', 'text/plain')
 
-    # Make sure the file upload is correct and is read properly
-    assert file.present?
-
     post api_games_url, params: { file: file }
 
     assert_response :ok
@@ -42,6 +39,20 @@ class Api::GamesControllerTest < ActionDispatch::IntegrationTest
     json_response = JSON.parse(response.body)
     assert_equal @game.id, json_response['id']
     assert json_response['game_data']
+  end
+
+  test "should get kills_by_means" do
+    get api_kills_by_means_url
+    assert_response :success
+    json_response = JSON.parse(@response.body)
+
+    # Assert that the JSON structure is correct
+    assert json_response.key?("game-#{@game.id}")
+    assert json_response["game-#{@game.id}"].key?("kills_by_means")
+
+    # Assert that the kills_by_means data is correct
+    expected_kills_by_means = @game.kills_by_means
+    assert_equal expected_kills_by_means, json_response["game-#{@game.id}"]["kills_by_means"]
   end
 
 end

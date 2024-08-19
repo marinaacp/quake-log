@@ -26,7 +26,7 @@ class LogParserService
     end
   end
 
-  # private
+  private
 
   def create_game(line)
     game_values = find_value_game(line)
