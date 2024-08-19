@@ -44,6 +44,21 @@ module Api
       Rails.logger.error(YAML::dump(e))
     end
 
+    def kills_by_means
+      games = Game.includes(:kills).all
+      json = {}
+
+      games.each do |game|
+        json["game-#{game.id}"] = {
+          kills_by_means: game.kills_by_means
+        }
+      end
+
+      render json: json
+    rescue => e
+      Rails.logger.error(YAML.dump(e))
+    end
+
     private
 
     def valid_file?(file)
