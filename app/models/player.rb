@@ -7,8 +7,7 @@ class Player < ApplicationRecord
 
   def kills_data
     return {
-      kills_as_killer: self.kills_as_killer,
-      kills_as_victim: self.kills_as_victim
+      kills: self.kills_as_victim
     }
   end
 end
