@@ -133,7 +133,8 @@ Gets information from all players.
         "created_at": "2024-08-19T10:58:01.139Z",
         "updated_at": "2024-08-19T10:58:01.156Z",
         "kills_data": {
-            "kills": []
+            "kills_as_killer": [],
+            "kills_as_victim": []
         }
     },
     {
@@ -147,7 +148,30 @@ Gets information from all players.
         "created_at": "2024-08-19T10:58:01.215Z",
         "updated_at": "2024-08-19T10:58:01.215Z",
         "kills_data": {
-            "kills": [
+            "kills_as_killer": [
+                {
+                    "id": 4,
+                    "killer_id": 2,
+                    "victim_id": 3,
+                    "type_death": "mod_rocket_splash",
+                    "is_world_death": false
+                },
+                {
+                    "id": 5,
+                    "killer_id": 2,
+                    "victim_id": 2,
+                    "type_death": "mod_rocket_splash",
+                    "is_world_death": false
+                },
+                {
+                    "id": 6,
+                    "killer_id": 2,
+                    "victim_id": 2,
+                    "type_death": "mod_rocket_splash",
+                    "is_world_death": false
+                }
+            ],
+            "kills_as_victim": [
                 {
                     "id": 1,
                     "killer_id": null,
@@ -232,7 +256,8 @@ Gets information from all players.
         "created_at": "2024-08-19T10:58:01.353Z",
         "updated_at": "2024-08-19T10:58:01.362Z",
         "kills_data": {
-            "kills": [
+            "kills_as_killer": [],
+            "kills_as_victim": [
                 {
                     "id": 4,
                     "killer_id": 2,
@@ -242,6 +267,7 @@ Gets information from all players.
                 }
             ]
         }
+
     }
 ]
 ```
@@ -263,7 +289,149 @@ Gets information from a specific player.
     "created_at": "2024-08-19T10:58:01.797Z",
     "updated_at": "2024-08-19T10:58:03.583Z",
     "kills_data": {
-        "kills": [
+        "kills_as_killer": [
+            {
+                "id": 19,
+                "killer_id": 7,
+                "victim_id": 9,
+                "type_death": "mod_rocket",
+                "is_world_death": false
+            },
+            {
+                "id": 25,
+                "killer_id": 7,
+                "victim_id": 9,
+                "type_death": "mod_rocket",
+                "is_world_death": false
+            },
+            {
+                "id": 31,
+                "killer_id": 7,
+                "victim_id": 8,
+                "type_death": "mod_rocket",
+                "is_world_death": false
+            },
+            {
+                "id": 42,
+                "killer_id": 7,
+                "victim_id": 8,
+                "type_death": "mod_rocket",
+                "is_world_death": false
+            },
+            {
+                "id": 43,
+                "killer_id": 7,
+                "victim_id": 7,
+                "type_death": "mod_rocket_splash",
+                "is_world_death": false
+            },
+            {
+                "id": 56,
+                "killer_id": 7,
+                "victim_id": 8,
+                "type_death": "mod_rocket",
+                "is_world_death": false
+            },
+            {
+                "id": 62,
+                "killer_id": 7,
+                "victim_id": 8,
+                "type_death": "mod_rocket_splash",
+                "is_world_death": false
+            },
+            {
+                "id": 63,
+                "killer_id": 7,
+                "victim_id": 9,
+                "type_death": "mod_rocket",
+                "is_world_death": false
+            },
+            {
+                "id": 64,
+                "killer_id": 7,
+                "victim_id": 7,
+                "type_death": "mod_rocket_splash",
+                "is_world_death": false
+            },
+            {
+                "id": 69,
+                "killer_id": 7,
+                "victim_id": 10,
+                "type_death": "mod_rocket_splash",
+                "is_world_death": false
+            },
+            {
+                "id": 71,
+                "killer_id": 7,
+                "victim_id": 7,
+                "type_death": "mod_rocket_splash",
+                "is_world_death": false
+            },
+            {
+                "id": 73,
+                "killer_id": 7,
+                "victim_id": 10,
+                "type_death": "mod_rocket_splash",
+                "is_world_death": false
+            },
+            {
+                "id": 79,
+                "killer_id": 7,
+                "victim_id": 10,
+                "type_death": "mod_rocket_splash",
+                "is_world_death": false
+            },
+            {
+                "id": 80,
+                "killer_id": 7,
+                "victim_id": 10,
+                "type_death": "mod_rocket_splash",
+                "is_world_death": false
+            },
+            {
+                "id": 82,
+                "killer_id": 7,
+                "victim_id": 7,
+                "type_death": "mod_rocket_splash",
+                "is_world_death": false
+            },
+            {
+                "id": 86,
+                "killer_id": 7,
+                "victim_id": 9,
+                "type_death": "mod_rocket_splash",
+                "is_world_death": false
+            },
+            {
+                "id": 97,
+                "killer_id": 7,
+                "victim_id": 10,
+                "type_death": "mod_rocket",
+                "is_world_death": false
+            },
+            {
+                "id": 98,
+                "killer_id": 7,
+                "victim_id": 9,
+                "type_death": "mod_rocket",
+                "is_world_death": false
+            },
+            {
+                "id": 108,
+                "killer_id": 7,
+                "victim_id": 9,
+                "type_death": "mod_railgun",
+                "is_world_death": false
+            },
+            {
+                "id": 112,
+                "killer_id": 7,
+                "victim_id": 10,
+                "type_death": "mod_rocket_splash",
+                "is_world_death": false
+            }
+        ],
+        "kills_as_victim": [
             {
                 "id": 17,
                 "killer_id": null,
