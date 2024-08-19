@@ -13,14 +13,14 @@ Testing Framework: Minitest
 
 ## POST /api/games
 
-Uploads a file to be parsed and save the data to the database. 
+Uploads a file to be parsed and save the data to the database.
 
 In Postman, select "form-data" in the body, use the key "file", and upload the file. This endpoint supports text files (.log/.txt).
 
 **Response**
 ```json
 {
-    "message": "File uploaded successfully"
+    "message": "File uploaded successfully. Processing in background."
 }
 ```
 
