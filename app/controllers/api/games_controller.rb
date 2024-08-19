@@ -26,6 +26,7 @@ module Api
 
     rescue Exception => e
       Rails.logger.error(YAML::dump(e))
+      render json: e.message, status: :unprocessable_content and return
     end
 
     def index
@@ -34,6 +35,7 @@ module Api
       render json: games.as_json(methods: [:game_data])
     rescue Exception => e
       Rails.logger.error(YAML::dump(e))
+      render json: e.message, status: :unprocessable_content and return
     end
 
     def show
@@ -42,6 +44,7 @@ module Api
       render json: game.as_json(methods: [:game_data])
     rescue Exception => e
       Rails.logger.error(YAML::dump(e))
+      render json: e.message, status: :unprocessable_content and return
     end
 
     def kills_by_means
@@ -57,6 +60,7 @@ module Api
       render json: json
     rescue => e
       Rails.logger.error(YAML.dump(e))
+      render json: e.message, status: :unprocessable_content and return
     end
 
     private
