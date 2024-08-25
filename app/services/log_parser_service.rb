@@ -3,6 +3,7 @@ class LogParserService
 
   def initialize(file)
     @file = file
+    @game = nil
   end
 
   def parse
@@ -13,15 +14,14 @@ class LogParserService
 
     # Open and read the file line by line
     File.foreach(@file) do |line|
-      game = Game.last
       if line.include?('InitGame:')
         create_game(line)
       elsif line.include?('ClientUserinfoChanged:')
-        check_if_player_existis(game, line)
+        check_if_player_existis(line)
       elsif line.include?('Kill:')
-        create_kill(game, line)
+        create_kill(line)
       elsif line.include?('score:')
-        update_player_score(game, line)
+        update_player_score(line)
       end
     end
   end
@@ -31,26 +31,29 @@ class LogParserService
   def create_game(line)
     game_values = find_value_game(line)
 
-    # Create the game with extracted values
-    Game.create!(
-      gametype: game_values[:gametype],
-      fraglimit: game_values[:fraglimit],
-      timelimit: game_values[:timelimit],
-      capturelimit: game_values[:capturelimit]
-    )
+    Game.transaction do
+      # Create the game with extracted values
+      game = Game.create!(
+        gametype: game_values[:gametype],
+        fraglimit: game_values[:fraglimit],
+        timelimit: game_values[:timelimit],
+        capturelimit: game_values[:capturelimit]
+      )
+      @game = game
+    end
   rescue Exception => e
     Rails.logger.error(YAML::dump(e))
   end
 
 
-  def check_if_player_existis(game, line)
+  def check_if_player_existis(line)
     player_values = find_value_player(line)
 
     id_in_log = player_values[:id_in_log]
-    existing_player = Player.find_by(game_id: game.id, id_in_log: id_in_log)
+    existing_player = Player.find_by(game_id: @game.id, id_in_log: id_in_log)
 
     if existing_player.nil?
-      create_player(player_values, game)
+      create_player(player_values)
     else
       update_player(player_values, existing_player)
     end
@@ -59,9 +62,9 @@ class LogParserService
   end
 
 
-  def create_player(player_values, game)
+  def create_player(player_values)
     Player.create!(
-      game_id: game.id,
+      game_id: @game.id,
       name: player_values[:name],
       model: player_values[:model],
       submodel: player_values[:submodel],
@@ -84,9 +87,9 @@ class LogParserService
   end
 
 
-  def update_player_score(game, line)
+  def update_player_score(line)
     score_values = find_value_score(line)
-    player = Player.find_by(game_id: game.id, id_in_log: score_values[:id_in_log])
+    player = Player.find_by(game_id: @game.id, id_in_log: score_values[:id_in_log])
     player.update!(
       score: score_values[:score]
     )
@@ -95,14 +98,14 @@ class LogParserService
   end
 
 
-  def create_kill(game, line)
+  def create_kill(line)
     kill_values = find_value_kill(line)
 
     killer = nil
     if kill_values[:log_killer_id] != 1022
-      killer = Player.find_by(game_id: game.id, id_in_log: kill_values[:log_killer_id])
+      killer = Player.find_by(game_id: @game.id, id_in_log: kill_values[:log_killer_id])
     end
-    victim = Player.find_by(game_id: game.id, id_in_log: kill_values[:log_victim_id])
+    victim = Player.find_by(game_id: @game.id, id_in_log: kill_values[:log_victim_id])
 
     # Create the game with extracted values
     Kill.create!(
